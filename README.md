@@ -15,29 +15,29 @@
 
 ## Технологии 
 Проект разрабатывается на Python 3.8.3 с ипользованием:
-    - **pandas**, **numpy** для обработки данных;
-    - **thinker** для GUI;
-    - **xlsxwriter** для взаимодействия с итоговым Excel-файлом
+    * **pandas**, **numpy** для обработки данных
+    * **thinker** для GUI
+    * **xlsxwriter** для взаимодействия с итоговым Excel-файлоv
 
 ## Установка 
 Выполните в терминале:
-'''
+```
 git clone https://github.com/alexeyt101/public_data_processing.git
 cd public_data_processing
 python
-'''
+```
 Далее для Windows :
-'''
+```
 python install_libraries.py
 python run_app.py
-'''
+```
 Для Linux:
-'''
+```
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
 python run_app.py
-'''
+```
 
 ## P.S. 
 В данный момент проект продолжает своё развитие, вносятся правки. В ближайшее время планируется добавление тестов. 
