@@ -20,18 +20,19 @@
 - **xlsxwriter** для взаимодействия с итоговым Excel-файлоv.
 
 ## Установка 
-Выполните в терминале:
+Выполните в терминале для Windows :
 ```
 git clone https://github.com/alexeyt101/public_data_processing.git
 cd public_data_processing
-```
-Далее для Windows :
-```
+move app\example_pump_config.py app\pump_config.py
 python install_libraries.py
 python run_app.py
 ```
 Для Linux:
 ```
+git clone https://github.com/alexeyt101/public_data_processing.git
+cd public_data_processing
+mv app/example_pump_config.py app/pump_config.py
 python3 -m venv env
 source env/bin/activate
 pip install -r requirements.txt
