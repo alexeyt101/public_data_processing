@@ -11,7 +11,7 @@
 
 ## Демо
 
-<p align="center"><img  src="./readme_assets/demo.png" width="70%"></p>
+![image](https://github.com/alexeyt101/public_data_processing/blob/readme_creating/readme_assets/demo.gif)
 
 ## Технологии 
 Проект разрабатывается на Python 3.8.3 с ипользованием:
