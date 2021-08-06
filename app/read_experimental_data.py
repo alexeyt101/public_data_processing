@@ -6,7 +6,7 @@ import config
 
 def search_experimental_data(input_data: DataFrame) -> DataFrame:
     '''Функция, которая осуществляет поиск и фильтрацию экспериментальных данных'''
-    column_drop_num = input_data.columns[input_data.isin(['Подача Мир 50, л/ч']).any()].tolist()[0]
+    column_drop_num = input_data.columns[input_data.isin(['Подача бол, л/ч']).any()].tolist()[0]
     input_data = input_data.drop(columns=range(column_drop_num))
     for row in input_data.index:
         if input_data.loc[row].hasnans:

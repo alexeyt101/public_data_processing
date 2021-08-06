@@ -133,6 +133,7 @@ dmypy.json
 # Some stuff
 .idea
 .vscode/
+.gif/
 *.xlsx
 *.xls
 *.cfg
