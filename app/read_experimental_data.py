@@ -14,7 +14,10 @@ def search_experimental_data(input_data: DataFrame) -> DataFrame:
     labels = input_data.loc[1]
     input_data = input_data.drop(index=1)
     input_data.columns = labels
-    input_data = input_data.stack().str.replace(',', '.').unstack()
+    try:
+        input_data = input_data.stack().str.replace(',', '.').unstack()
+    except AttributeError:
+        pass
     input_data = input_data.apply(pd.to_numeric)
     return input_data
 
