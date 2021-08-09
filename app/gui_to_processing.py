@@ -212,7 +212,6 @@ class App(Frame):
 
 def main_func() -> None:
     root = Tk()
-    print(root)
     App(root)
     root.mainloop()
 

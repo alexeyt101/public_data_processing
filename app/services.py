@@ -31,23 +31,22 @@ def processing_data(type_processing: str, file_name: str, lable_agr: str) -> pd.
     '''
 
     file_2 = read_experimantal_data(file_name)
-    Q_array = np.array(file_2['Подача Мир 15, л/ч'])
+    Q_array = np.array(file_2['Подача мал, л/ч'])
     if Q_array[0] < 50:
-        Q_array = np.array(file_2['Подача Мир 50, л/ч'])
+        Q_array = np.array(file_2['Подача бол, л/ч'])
     dp_array = np.array(file_2['Перепад, кгс/см2'])
     if type_processing == 'Кавитация':
         d_0 = PUMP_INLET_SIZE[lable_agr]['D0']
         d_vt = PUMP_INLET_SIZE[lable_agr]['d_vt']
         P_vh_array = np.array(file_2['Р вход, кгс/см2'])
-    # T_vh_array = np.array(file_2['t вход, ºС']) #временно этот параметр неактивен
+    T_vh_array = np.array(file_2['t вход, ºС'])
     n_array = np.array(file_2['Частота вращения, об/мин'])
     T_vih_array = np.array(file_2['t выход, ºС'])
     Power_array = np.array(file_2['Мощность, кВт']) * 1000
 
     del file_2
 
-    # density_array_all = density(np.mean([T_vih_array, T_vih_array], axis=0)) #временно этот параметр неактивен
-    density_array_all = density(T_vih_array)
+    density_array_all = density(np.mean([T_vh_array, T_vih_array], axis=0))
     head_array_all = head(dp_array, density_array_all)
     q_n_array_all = q_n(Q_array, n_array)
     h_n2_array_all = h_n2(head_array_all, n_array)

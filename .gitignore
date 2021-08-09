@@ -133,8 +133,8 @@ dmypy.json
 # Some stuff
 .idea
 .vscode/
+.gif/
 *.xlsx
 *.xls
 *.cfg
 README.txt
-pump_config.py
