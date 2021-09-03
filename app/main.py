@@ -5,7 +5,7 @@ from save_result_data import add_complex_chart, save_result_data
 from services import processing_data, search_input_files
 
 
-def main_func(type_processing: str, result_file_name: str, pump_name: str, file_names: tuple) -> str:
+def main_func(type_processing: str, result_file_name: str, pump_name: str, file_names: list) -> str:
     '''Функция верхнего уровня, вызывающая необходимые функции'''
     if not file_names:
         file_names = search_input_files(DIRECTORY_FOR_SEARCH_XLS_FILES)

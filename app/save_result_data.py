@@ -1,16 +1,18 @@
-from typing import Dict
+from typing import Any, Dict, Union
 
-from pandas.core.frame import DataFrame
+import pandas as pd
 from pandas.io.excel._xlsxwriter import XlsxWriter
 from xlsxwriter.workbook import Workbook, Worksheet
 
 from graphs_config import AXISES_PARAM, CHART_SIZE, CHART_STYLE, GRAPH_LOCATIONS, PARAM_COLUMNS
 
+GraphParams = Dict[str, Union[str, int, float, bool, Dict[str, Union[str, int, bool]]]]
 
-def add_chart_settings(name: str, major_unit: float = 0, num_format: str = '') -> Dict:
+
+def add_chart_settings(name: str, major_unit: Union[float, int] = 0, num_format: str = '') -> GraphParams:
     '''Функци, которая формирует словарь параметров для графиков'''
 
-    chart_config = {
+    chart_config: GraphParams = {
         'name': name,
         'name_font': {
             'name': 'Times New Roman',
@@ -172,7 +174,7 @@ def add_complex_chart(writer: XlsxWriter, type_processing: str) -> None:
     insert_graph(all_data_chart_worksheet, type_processing, graphs, graphs_names, graph_of_all=True)
 
 
-def save_result_data(writer: XlsxWriter, sheet_name: str, type_processing: str, result_data: DataFrame) -> None:
+def save_result_data(writer: XlsxWriter, sheet_name: str, type_processing: str, result_data: pd.DataFrame) -> None:
     '''Функция, которая сохраняет обработанные данные в exel-файл'''
     result_data.to_excel(writer, sheet_name=sheet_name, startrow=1, header=False)
     workbook = writer.book
