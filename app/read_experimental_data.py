@@ -1,10 +1,9 @@
 import pandas as pd
-from pandas.core.frame import DataFrame
 
 import config
 
 
-def search_experimental_data(input_data: DataFrame) -> DataFrame:
+def search_experimental_data(input_data: pd.DataFrame) -> pd.DataFrame:
     '''Функция, которая осуществляет поиск и фильтрацию экспериментальных данных'''
     column_drop_num = input_data.columns[input_data.isin(['Подача бол, л/ч']).any()].tolist()[0]
     input_data = input_data.drop(columns=range(column_drop_num))
@@ -22,7 +21,7 @@ def search_experimental_data(input_data: DataFrame) -> DataFrame:
     return input_data
 
 
-def read_experimantal_data(file_name: str) -> DataFrame:
+def read_experimantal_data(file_name: str) -> pd.DataFrame:
     '''
     Функция, которая считывает данные из файла испытаний и подготовливает
     DataFrame для дальнейшей обработки

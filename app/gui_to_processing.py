@@ -11,7 +11,7 @@ from pump_config import PUMP_INLET_SIZE
 
 class App(Frame):
 
-    def __init__(self, parent: Tk):
+    def __init__(self, parent: Tk) -> None:
         Frame.__init__(self, parent, background='#BBD8E9')
         self.parent = parent
         self.photo = PhotoImage(file='icon.png')
