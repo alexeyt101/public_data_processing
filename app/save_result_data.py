@@ -6,13 +6,15 @@ from xlsxwriter.workbook import Workbook, Worksheet
 
 from graphs_config import AXISES_PARAM, CHART_SIZE, CHART_STYLE, GRAPH_LOCATIONS, PARAM_COLUMNS
 
-GraphParams = Dict[str, Union[str, int, float, bool, Dict[str, Union[str, int, bool]]]]
+GraphParamsType = Dict[str, Union[str, int, float, bool, Dict[str, Union[str, int, bool]]]]
+LegendParamsType = Dict[str, Union[str, Dict[str, Union[str, int, bool]]]]
+SeriesParamsType = Dict[str, Union[str, Dict[str, Union[str, int]]]]
 
 
-def add_chart_settings(name: str, major_unit: Union[float, int] = 0, num_format: str = '') -> GraphParams:
+def add_chart_settings(name: str, major_unit: Union[float, int] = 0, num_format: str = '') -> GraphParamsType:
     '''Функци, которая формирует словарь параметров для графиков'''
 
-    chart_config: GraphParams = {
+    chart_config: GraphParamsType = {
         'name': name,
         'name_font': {
             'name': 'Times New Roman',
@@ -35,10 +37,10 @@ def add_chart_settings(name: str, major_unit: Union[float, int] = 0, num_format:
     return chart_config
 
 
-def get_legend_settings(font_size: int = 14, position: str = 'bottom') -> Dict:
+def get_legend_settings(font_size: int = 14, position: str = 'bottom') -> LegendParamsType:
     '''Функция, которая возращает словарь параметров для легенды графика'''
 
-    settings = {
+    settings: LegendParamsType = {
         'position': position,
         'font': {
             'name': 'Times New Roman',
@@ -72,14 +74,14 @@ def set_axises_settings(type_processing: str, graphs_list: list, graph_names: li
         graph.set_y_axis(add_chart_settings(y_axis_name, **y_axis_params))
 
 
-def get_chart_dict(sheet_name: str, x_values: str, y_values: str) -> Dict:
+def get_chart_dict(sheet_name: str, x_values: str, y_values: str) -> SeriesParamsType:
     '''Функция, которая заполняет словарь параметров для добавления данных на график'''
-    chart_series_dict = {
+    chart_series_dict: SeriesParamsType = {
         'name': sheet_name,
         'categories': f"='{sheet_name}'!{x_values}",
         'values': f"='{sheet_name}'!{y_values}",
         'marker': {'type': 'automatic', 'size': 5}
-                            }
+    }
     return chart_series_dict
 
 

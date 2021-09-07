@@ -1,14 +1,20 @@
+from typing import Dict, List, Union
+
+ColumnsParamType = Dict[str, Dict[str, List[str]]]
+GraphLocationType = Dict[str, Dict[str, str]]
+AxisParamType = Dict[str, Dict[str, Dict[str, Dict[str, Union[str, Dict[str, Union[str, float]]]]]]]
+
 '''Размер результирующих графиков'''
-CHART_SIZE = {
+CHART_SIZE: Dict[str, int] = {
         'width': 720,
         'height': 400
                 }
 
 '''Стиль результирующих графиков'''
-CHART_STYLE = 2
+CHART_STYLE: int = 2
 
 '''Обозначение колонок с параметрами для графиков'''
-PARAM_COLUMNS = {
+PARAM_COLUMNS: ColumnsParamType = {
         'Напор': {
                 'Перепад': ['$E$2:$E$100', '$F$2:$F$100'],
                 'Мощность': ['$E$2:$E$100', '$H$2:$H$100'],
@@ -26,7 +32,7 @@ PARAM_COLUMNS = {
 }
 
 '''Размещение графиков на листе'''
-GRAPH_LOCATIONS = {
+GRAPH_LOCATIONS: GraphLocationType = {
     'Напор': {
         'Перепад': 'M2',
         'Мощность': 'M17',
@@ -48,7 +54,7 @@ GRAPH_LOCATIONS = {
 }
 
 """Параметры осей для графиков"""
-AXISES_PARAM = {
+AXISES_PARAM: AxisParamType = {
         'Напор': {
                 'Перепад': {
                     'x': {

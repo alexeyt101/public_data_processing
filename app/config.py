@@ -1,18 +1,19 @@
 import os
+from typing import Dict, List
 
 '''Рабочие директории'''
-DIRECTORY_FOR_SEARCH_XLS_FILES = os.path.dirname(
+DIRECTORY_FOR_SEARCH_XLS_FILES: str = os.path.dirname(
         os.path.abspath(__file__)).replace('app', 'input_data')
-DIRECTORY_FOR_SAVE_RESULT_FILE = os.path.dirname(os.path.abspath(__file__)).replace('app', '')
+DIRECTORY_FOR_SAVE_RESULT_FILE: str = os.path.dirname(os.path.abspath(__file__)).replace('app', '')
 
 '''Список для поиска наименований параметров в экспериментальном файле'''
-DEFAULT_LABELS = [
+DEFAULT_LABELS: List[str] = [
         'Номер агрегата:', 'Дата:', 'Ф.И.О. Испытателя:',
         'Ф.И.О. Слесаря:', 'Подача Мир 50, л/ч',
-        ]
+]
 
 '''Наименования колонок в файле результатов'''
-head_output_columns = [
+head_output_columns: List[str] = [
         'Температура топлива, град',
         'Плотность топлива, кг/м3',
         'Частота вращения, об/мин',
@@ -24,9 +25,9 @@ head_output_columns = [
         'Q/n, л*мин/ч',
         'H/n2, м*мин2',
         'N/n3, Вт*мин3',
-                        ]
+]
 
-cavitation_output_columns = [
+cavitation_output_columns: List[str] = [
         'Температура топлива, град',
         'Плотность топлива, кг/м3',
         'Частота вращения, об/мин',
@@ -45,4 +46,4 @@ cavitation_output_columns = [
         'N/n3, Вт*мин3',
         'dh/n2, м*мин/об',
         'Скр'
-                                ]
+]
