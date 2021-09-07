@@ -8,6 +8,7 @@ from tkinter.ttk import Combobox, Style
 from main import main_func as processing_func
 from pump_config import PUMP_INLET_SIZE
 
+StateType = Union[Literal['active'], Literal['disabled']]
 
 class App(Frame):
 
@@ -104,8 +105,6 @@ class App(Frame):
                                 width=25,
                                     )
         self.pump_list.place(x=x, y=y)
-
-    StateType = Union[Literal['active'], Literal['disabled']]
 
     def create_brows_button(self, text: str, width: int, state: StateType, x: int, y: int) -> None:
         '''Метод, который объявляет виджет Button для выбора файлов исходных данных'''
