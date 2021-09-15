@@ -10,6 +10,7 @@ from pump_config import PUMP_INLET_SIZE
 
 StateType = Union[Literal['active'], Literal['disabled']]
 
+
 class App(Frame):
 
     def __init__(self, parent: Tk) -> None:

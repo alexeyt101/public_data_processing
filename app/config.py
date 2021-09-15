@@ -1,5 +1,5 @@
 import os
-from typing import Dict, List
+from typing import List
 
 '''Рабочие директории'''
 DIRECTORY_FOR_SEARCH_XLS_FILES: str = os.path.dirname(
