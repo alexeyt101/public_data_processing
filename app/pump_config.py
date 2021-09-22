@@ -1,3 +1,4 @@
+"""Модуль конфигураций насосов (размеров проточных частей)."""
 from typing import Dict, Union
 
 InletSizeType = Dict[str, Dict[str, Union[int, float]]]

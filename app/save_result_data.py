@@ -1,9 +1,10 @@
+"""Модуль сохранения обработанных данных и построения графиков."""
 from typing import Dict, List, Union
 
 import pandas as pd
 from pandas.io.excel._xlsxwriter import XlsxWriter
-from xlsxwriter.workbook import Workbook, Worksheet
 from xlsxwriter.chart_scatter import ChartScatter
+from xlsxwriter.workbook import Workbook, Worksheet
 
 from graphs_config import AXISES_PARAM, CHART_SIZE, CHART_STYLE, GRAPH_LOCATIONS, PARAM_COLUMNS
 
@@ -13,24 +14,23 @@ SeriesParamsType = Dict[str, Union[str, Dict[str, Union[str, int]]]]
 
 
 def add_chart_settings(name: str, major_unit: Union[float, int] = 0, num_format: str = '') -> GraphParamsType:
-    '''Функци, которая формирует словарь параметров для графиков'''
-
+    """Функци, которая формирует словарь параметров для графиков."""
     chart_config: GraphParamsType = {
         'name': name,
         'name_font': {
             'name': 'Times New Roman',
             'size': 14,
-            'bold': False
-                        },
+            'bold': False,
+        },
         'num_font': {
             'name': 'Times New Roman',
             'size': 14,
-            'bold': False
-                        },
+            'bold': False,
+        },
         'major_gridlines': {
-            'visible': True
-                        },
-        }
+            'visible': True,
+        },
+    }
     if major_unit:
         chart_config['major_unit'] = major_unit
     if num_format:
@@ -39,21 +39,20 @@ def add_chart_settings(name: str, major_unit: Union[float, int] = 0, num_format:
 
 
 def get_legend_settings(font_size: int = 14, position: str = 'bottom') -> LegendParamsType:
-    '''Функция, которая возращает словарь параметров для легенды графика'''
-
+    """Функция, которая возращает словарь параметров для легенды графика."""
     settings: LegendParamsType = {
         'position': position,
         'font': {
             'name': 'Times New Roman',
             'size': font_size,
-            'bold': False
-                        },
+            'bold': False,
+        },
     }
     return settings
 
 
 def set_graph_settings(graphs_list: List[ChartScatter], graph_size: bool = False, legend: bool = False) -> None:
-    '''Функция, которая настраивает стиль, заголовок, легенду и размер графиков'''
+    """Функция, которая настраивает стиль, заголовок, легенду и размер графиков."""
     for graph in graphs_list:
         graph.set_style(CHART_STYLE)
         graph.set_title({'none': True})
@@ -65,7 +64,7 @@ def set_graph_settings(graphs_list: List[ChartScatter], graph_size: bool = False
 
 
 def set_axises_settings(type_processing: str, graphs_list: List[ChartScatter], graph_names: List[str]) -> None:
-    '''Функция, которая настраивает названия осей на графиках, а также другие параметры форматирования'''
+    """Функция, которая настраивает названия осей на графиках, а также другие параметры форматирования."""
     for graph, graph_name in zip(graphs_list, graph_names):
         x_axis_name = AXISES_PARAM[type_processing][graph_name]['x']['name']
         x_axis_params = AXISES_PARAM[type_processing][graph_name]['x']['params']
@@ -76,29 +75,29 @@ def set_axises_settings(type_processing: str, graphs_list: List[ChartScatter], g
 
 
 def get_chart_dict(sheet_name: str, x_values: str, y_values: str) -> SeriesParamsType:
-    '''Функция, которая заполняет словарь параметров для добавления данных на график'''
+    """Функция, которая заполняет словарь параметров для добавления данных на график."""
     chart_series_dict: SeriesParamsType = {
         'name': sheet_name,
         'categories': f"='{sheet_name}'!{x_values}",
         'values': f"='{sheet_name}'!{y_values}",
-        'marker': {'type': 'automatic', 'size': 5}
+        'marker': {'type': 'automatic', 'size': 5},
     }
     return chart_series_dict
 
 
 def add_series_to_chart(
-    type_processing: str, graphs_list: List[ChartScatter], graph_names: List[str], sheet_name: str
+    type_processing: str, graphs_list: List[ChartScatter], graph_names: List[str], sheet_name: str,
 ) -> None:
-    '''Функция, которая добавляет данные со страницы Excel документа на график'''
+    """Функция, которая добавляет данные со страницы Excel документа на график."""
     for graph, graph_name in zip(graphs_list, graph_names):
         graph.add_series(
-            get_chart_dict(sheet_name, *PARAM_COLUMNS[type_processing][graph_name])
+            get_chart_dict(sheet_name, *PARAM_COLUMNS[type_processing][graph_name]),
         )
 
 
 def insert_graph(worksheet: Worksheet, type_processing: str,
                  graphs_list: List[ChartScatter], graphs_names: List[str], graph_of_all: bool = False) -> None:
-    '''Функция, которая производит размещение графиков на листе в Excel документе'''
+    """Функция, которая производит размещение графиков на листе в Excel документе."""
     for graph, graph_name in zip(graphs_list, graphs_names):
         if not graph_of_all:
             graph_location = GRAPH_LOCATIONS[type_processing][graph_name]
@@ -108,8 +107,7 @@ def insert_graph(worksheet: Worksheet, type_processing: str,
 
 
 def add_chart_to_worksheet(workbook: Workbook, worksheet: Worksheet, type_processing: str) -> None:
-    '''Функция, которая на основе данных, записанных в эксель, строит графики и размещает их странице'''
-
+    """Функция, которая на основе данных, записанных в эксель, строит графики и размещает их странице."""
     sheet_name: str = worksheet.get_name()
 
     if type_processing == 'Напор':
@@ -119,10 +117,10 @@ def add_chart_to_worksheet(workbook: Workbook, worksheet: Worksheet, type_proces
         power_chart = workbook.add_chart({'type': 'scatter'})
         kpd_chart = workbook.add_chart({'type': 'scatter'})
         h_n2_chart = workbook.add_chart({'type': 'scatter'})
-        N_n3_chart = workbook.add_chart({'type': 'scatter'})
-        kpd_Qn_chart = workbook.add_chart({'type': 'scatter'})
+        n_n3_chart = workbook.add_chart({'type': 'scatter'})
+        kpd_qn_chart = workbook.add_chart({'type': 'scatter'})
 
-        graphs: List[ChartScatter] = [head_chart, power_chart, kpd_chart, h_n2_chart, N_n3_chart, kpd_Qn_chart]
+        graphs: List[ChartScatter] = [head_chart, power_chart, kpd_chart, h_n2_chart, n_n3_chart, kpd_qn_chart]
         graphs_names: List[str] = ['Перепад', 'Мощность', 'КПД', 'Н/n2', 'N/n3', 'КПД_Q/n']
 
         add_series_to_chart(type_processing, graphs, graphs_names, sheet_name)
@@ -132,10 +130,10 @@ def add_chart_to_worksheet(workbook: Workbook, worksheet: Worksheet, type_proces
 
     else:
         """ Графики для кавитационных характеристик """
-        H_pvh_chart = workbook.add_chart({'type': 'scatter'})
-        H_dh_chart = workbook.add_chart({'type': 'scatter'})
+        h_pvh_chart = workbook.add_chart({'type': 'scatter'})
+        h_dh_chart = workbook.add_chart({'type': 'scatter'})
 
-        graphs = [H_pvh_chart, H_dh_chart]
+        graphs = [h_pvh_chart, h_dh_chart]
         graphs_names = ['Напор', 'Н/n2']
 
         add_series_to_chart(type_processing, graphs, graphs_names, sheet_name)
@@ -145,8 +143,7 @@ def add_chart_to_worksheet(workbook: Workbook, worksheet: Worksheet, type_proces
 
 
 def add_complex_chart(writer: XlsxWriter, type_processing: str) -> None:
-    """ Функция, которая стоит сводные графики по серии испытаний на основе обработанных данных """
-
+    """Функция, которая стоит сводные графики по серии испытаний на основе обработанных данных."""
     workbook = writer.book
     worksheets = workbook.worksheets()
     all_data_chart_worksheet = workbook.add_worksheet('Сводные графики')
@@ -180,7 +177,7 @@ def add_complex_chart(writer: XlsxWriter, type_processing: str) -> None:
 
 
 def save_result_data(writer: XlsxWriter, sheet_name: str, type_processing: str, result_data: pd.DataFrame) -> None:
-    '''Функция, которая сохраняет обработанные данные в exel-файл'''
+    """Функция, которая сохраняет обработанные данные в exel-файл."""
     result_data.to_excel(writer, sheet_name=sheet_name, startrow=1, header=False)
     workbook = writer.book
     worksheet = writer.sheets[sheet_name]
@@ -189,7 +186,7 @@ def save_result_data(writer: XlsxWriter, sheet_name: str, type_processing: str, 
                                         'text_wrap': True,
                                         'valign': 'top',
                                         'fg_color': '#D7E4BC',
-                                        'border': 1
+                                        'border': 1,
                                         })
     header_format.set_align('center')
     header_format.set_align('vcenter')
